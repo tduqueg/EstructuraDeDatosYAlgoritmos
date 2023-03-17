@@ -1,4 +1,20 @@
 
+class TreeComparator:
+    
+    def compare(self, node1, node2):
+        
+        #Debemos analizar el caso base de manera que los ninguno sea un None
+        if not node1 or not node2:
+            return node1 == node2
+        
+        #Tenemos que analizar los valores de los nodos
+        if node1.data is not node2.data:
+            return False
+        
+        #Debemos revisar los subarboles izquierdos y derechos recursivamente
+        return self.compare(node1.left_node,node2.left_node) and self.compare(node1.right_node,node2.right_node)
+
+
 class Node:
 
     def __init__(self, data, parent = None):
@@ -166,23 +182,28 @@ class BinarySearchTree:
         if node.right_node:
             self.traverse_in_order(node.right_node)
 
+    
+
 if __name__ == '__main__':
-    bst = BinarySearchTree()
-    bst.insert(10)
-    bst.insert(9)
-    bst.insert(20)
-    bst.insert(32)
-    bst.insert(-2)
-    bst.insert(3)
-    bst.insert(200)
-    bst.insert(-50)
-    bst.insert(69)
-    bst.insert(-96)
-    bst.traverse()
-    bst.remove(10)
-    bst.traverse()
-    print("Valor Máximo: %d" % bst.get_max())
-    print("Valor Minimo: %d" % bst.get_min())
+    bst1 = BinarySearchTree()
+    bst1.insert(10)
+    bst1.insert(9)
+    bst1.insert(20)
+    bst1.insert(32)
+    bst1.traverse()
+    bst2 = BinarySearchTree()
+    bst2.insert(10)
+    bst2.insert(9)
+    bst2.insert(20)
+    bst2.insert(32)
+    bst2.traverse()
+
+    comparator = TreeComparator()
+    print(comparator.compare(bst1, bst2))
+    
+
+    print("Valor Máximo: %d" % bst1.get_max())
+    print("Valor Minimo: %d" % bst1.get_min())
     
         
 

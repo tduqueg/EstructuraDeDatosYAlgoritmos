@@ -302,6 +302,15 @@ if __name__ == '__main__':
     avl.insert(30)
     avl.insert(23)
     avl.insert(98)
+    avl.insert(100)
+    avl.insert(7)
+    avl.insert(3404)
+    avl.insert(12)
+    avl.insert(98)
+    avl.insert(101)
+    avl.insert(42)
+    avl.insert(131)
+    avl.insert(643)
     avl.traverse()
 
 

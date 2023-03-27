@@ -99,6 +99,76 @@ class DisJointSet:
             root1.parent = root2
             root2.rank += 1
 
+class KruskalAlgorithm:
+
+    def __init__(self, vertex_list, edge_list):
+
+        self.vertex_list = vertex_list
+        self.edge_list = edge_list
+
+    def find_mst(self):
+
+        disjoint_set = DisJointSet(self.vertex_list)
+        mst = []
+
+
+        #Algoritmo MST
+        #Organizamos las conexiones dependiendo de su peso
+        self.edge_list.sort()
+
+        #Consideramos las conexiones de manera organizada
+        for edge in self.edge_list:
+
+            u = edge.start_vertex
+            v = edge.target_vertex
+
+            #Los nodos asociados con u y v nodos están en el mismo conjunto disjunto 
+            #o no (Si comparten el mismo nodo raíz)
+            if disjoint_set.find(u.node) is not disjoint_set.find(v.node):
+                
+                mst.append(edge)
+
+                #Tenemos ue combinar los conjuntos disjuntos
+                disjoint_set.merge(u.node, v.node)
+        
+        for edge in mst:
+
+            print(edge.start_vertex.name, ' - ', edge.target_vertex.name,' - ',edge.weight)
+
+if __name__ == '__main__':
+
+    #Vertices del grafo
+    vertex1 = Vertex("A")
+    vertex2 = Vertex("B")
+    vertex3 = Vertex("C")
+    vertex4 = Vertex("D")
+    vertex5 = Vertex("E")
+    vertex6 = Vertex("F")
+    vertex7 = Vertex("G")
+
+    # Conexiones
+    edge1 = Edge(2, vertex1, vertex2)
+    edge2 = Edge(6, vertex1, vertex3)
+    edge3 = Edge(5, vertex1, vertex5)
+    edge4 = Edge(10, vertex1, vertex6)
+    edge5 = Edge(3, vertex2, vertex4)
+    edge6 = Edge(3, vertex2, vertex5)
+    edge7 = Edge(1, vertex3, vertex4)
+    edge8 = Edge(2, vertex3, vertex6)
+    edge9 = Edge(4, vertex4, vertex5)
+    edge10 = Edge(5, vertex4, vertex7)
+    edge11 = Edge(5, vertex6, vertex7)
+
+    # Creamos las listas de los vertices y las conexiones
+    vertices = [vertex1, vertex2, vertex3, vertex4, vertex5, vertex6, vertex7]
+    edges = [edge1, edge2, edge3, edge4, edge5, edge6, edge7, edge8, edge9, edge10, edge11]
+
+    # Corremos el algoritmo para encontrar el mst(minimum spanning tree)
+    algorithm = KruskalAlgorithm(vertices, edges)
+    algorithm.find_mst()
+
+
+
         
 
 
